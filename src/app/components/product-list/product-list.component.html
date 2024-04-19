@@ -50,7 +50,7 @@
   <div>
     <h1 class="uppercase font-normal text-2xl tracking-wide italic font-oswald">
       NEW ARRIVALS: SHOES, CLOTHING & MORE
-      <span class="text-xs not-italic mx-2 text-gray-500 font-light">[697]</span>
+      <span class="text-xs not-italic mx-2 text-gray-500 font-light">[{{ productsList()?.length }}]</span>
     </h1>
     <div class="flex max-w-3xl my-4 relative">
       <p class="line-clamp-3 font-sans">Give your athletic attire a makeover with the latest adidas clothes and shoes.
@@ -85,8 +85,8 @@
 
     <!-- HERE GO CARDS -->
 
-    @for (item of items; track $index) {
-    <app-product-card />
+    @for (item of productsList(); track $index) {
+    <app-product-card [product]="item"></app-product-card>
     }
 
 
