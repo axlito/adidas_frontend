@@ -25,11 +25,23 @@ export class ProductCardComponent implements OnInit {
 
   }
 
+
+  //
+  // REMEMBER TO FIX HOVER WIDTH WHEN WINDOW CHANGE
+  //
   public previewImage(url: string) {
-    const mainWidth = this.mainImage.nativeElement.width;
-    if (url !== "") {
+    if (!this.isMobile() && url !== "") {
+      const mainWidth = this.mainImage.nativeElement.width;
       this.renderer.setAttribute(this.mainImage.nativeElement, 'src', url)
       this.renderer.setAttribute(this.mainImage.nativeElement, 'width', `${mainWidth}px`)
+    }
+  }
+
+  public isMobile(): boolean {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      return true
+    } else {
+      return false
     }
   }
 
