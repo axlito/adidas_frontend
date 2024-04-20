@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product } from '../interfaces/product';
+import { Observable, map } from 'rxjs';
+import { Pagination, Product, ResponseData } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
 
   private baseUrl: string = '../../assets/DatosScraping.json';
 
@@ -14,10 +15,21 @@ export class ProductService {
     private httpClient: HttpClient
   ) { }
 
-  public getGamesList(): Observable<Product[]> {
-
-    return this.httpClient.get<Product[]>(this.baseUrl);
-
+  public getProductList(page: number): Observable<ResponseData> {
+    return this.httpClient.get<Product[]>(this.baseUrl)
+      .pipe(
+        map(result => {
+          return {
+            products: result.slice((page * 48), (page * 48) + 48),
+            pagination: {
+              prev: Math.max(0, (page - 1)),
+              current: page,
+              next: (page + 1),
+              max: (Math.round(result.length / 48))
+            }
+          }
+        })
+      );
   }
 
 }

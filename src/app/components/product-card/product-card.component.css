@@ -1,3 +1,31 @@
-:host {
-  display: block;
+.product-card {
+  @apply max-w-md overflow-hidden border border-gray-100 bg-gray-100 z-10
+}
+
+.product-card-animated {
+  @apply hover:border-black hover:absolute
+}
+
+.card-container {
+  @apply flex relative
+}
+
+.product-price {
+  @apply bg-gray-100 absolute bottom-0 left-2 p-1 leading-3 text-sm group-hover:bottom-2 transition-all
+}
+
+.add-to-cart {
+  @apply absolute right-4 top-4 w-4 h-4
+}
+
+.color-detail {
+  @apply w-full h-12 my-1
+}
+
+.color-images {
+  @apply hover:border-b-2 hover:border-black
+}
+
+.product-description {
+  @apply font-normal text-sm my-0.5
 }

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, computed, signal } from '@angular/core';
-import { ProductCardComponent } from "../product-card/product-card.component";
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, computed, signal } from '@angular/core';
+import { Pagination, Product, ResponseData } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
-import { Product } from '../../interfaces/product';
+import { ProductCardComponent } from "../product-card/product-card.component";
+import { MainHeaderComponent } from "../../shared/main-header/main-header.component";
 
 @Component({
   selector: 'app-product-list',
@@ -12,15 +13,16 @@ import { Product } from '../../interfaces/product';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    ProductCardComponent
+    ProductCardComponent,
+    MainHeaderComponent
   ]
 })
 export class ProductListComponent implements OnInit {
 
-  public scrollClass: string = 'top-0';
-  public position: number = 0;
   private _productsList = signal<Product[] | null>(null);
   public productsList = computed(() => this._productsList());
+  private _pagination = signal<Pagination | null>(null);
+  public pagination = computed(() => this._pagination());
 
 
   @ViewChild('navbar') navbar!: ElementRef<HTMLInputElement>;
@@ -28,35 +30,15 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProductsList();
-
+    this.getProductsList(0);
   }
 
-  public getProductsList(): void {
-    this.productService.getGamesList()
-      .subscribe((result: Product[]) => {
-        this._productsList.set(result.slice(0,45));
+  public getProductsList(page: number): void {
+    this.productService.getProductList(page)
+      .subscribe((result: ResponseData) => {
+        this._productsList.set(result.products);
+        this._pagination.set(result.pagination);
       });
   }
-
-  @HostListener('document:scroll', ['$event'])
-  public onViewportScroll() {
-
-    const scrollAmount = window.scrollY || document.documentElement.scrollTop;
-
-    if (scrollAmount > this.position) {
-      this.scrollClass = '-top-24';
-    } else {
-      this.scrollClass = 'top-0';
-    }
-
-    this.position = scrollAmount
-
-
-
-
-
-  }
-
 
 }

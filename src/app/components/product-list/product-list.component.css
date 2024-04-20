@@ -1,3 +1,11 @@
-:host {
-  display: block;
+.grid-container {
+  @apply text-black grid grid-flow-row gap-px grid-cols-2 sm:grid-cols-3 sm:px-4 md:grid-cols-3 lg:grid-cols-4 lg:px-8 xl:px-10 2xl:px-0 2xl:max-w-7xl 2xl:mx-auto min-[1600px]:max-w-screen-2xl
+}
+
+.site-padding {
+  @apply px-4 md:px-4 lg:px-8 xl:px-10 2xl:px-0 2xl:max-w-7xl 2xl:mx-auto min-[1600px]:max-w-screen-2xl
+}
+
+.pagination-button {
+  @apply flex flex-row items-center lg:border lg:border-black px-3 py-1.5 font-semibold text-sm hover:text-gray-500 transition-colors disabled:border-gray-500 disabled:text-gray-500
 }
