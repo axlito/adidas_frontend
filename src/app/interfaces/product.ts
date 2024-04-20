@@ -4,11 +4,10 @@ export interface ResponseData {
 }
 
 export interface Pagination {
-  pageSize: number
-  currentPage: number;
-  prevPage?: number;
-  nextPage?: number;
-  maxPages: number;
+  current: number;
+  prev: number;
+  next: number;
+  max: number
 }
 
 export interface Product {

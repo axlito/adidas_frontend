@@ -1,31 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Product, ResponseData } from '../interfaces/product';
+import { Pagination, Product, ResponseData } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private responseData = signal<ResponseData | null>(null);
+
   private baseUrl: string = '../../assets/DatosScraping.json';
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  public getProductList(): Observable<ResponseData> {
+  public getProductList(page: number): Observable<ResponseData> {
     return this.httpClient.get<Product[]>(this.baseUrl)
       .pipe(
         map(result => {
           return {
-            products: result.slice(0, 48),
+            products: result.slice((page * 48), (page * 48) + 48),
             pagination: {
-              pageSize: 48,
-              currentPage: 1,
-              nextPage: 2,
-              maxPages: Math.round(result.length / 48),
+              prev: Math.max(0, (page - 1)),
+              current: page,
+              next: (page + 1),
+              max: (Math.round(result.length / 48))
             }
           }
         })
