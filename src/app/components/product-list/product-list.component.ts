@@ -3,17 +3,19 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, comp
 import { Product, ResponseData } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
 import { ProductCardComponent } from "../product-card/product-card.component";
+import { MainHeaderComponent } from "../../shared/main-header/main-header.component";
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    CommonModule,
-    ProductCardComponent
-  ]
+    selector: 'app-product-list',
+    standalone: true,
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        ProductCardComponent,
+        MainHeaderComponent
+    ]
 })
 export class ProductListComponent implements OnInit {
 

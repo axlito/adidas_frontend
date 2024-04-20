@@ -1,0 +1,55 @@
+.site-padding {
+  @apply px-4 md:px-4 lg:px-8 xl:px-10 2xl:px-0 2xl:max-w-7xl 2xl:mx-auto min-[1600px]:max-w-screen-2xl
+}
+
+.header-container {
+  @apply flex flex-row justify-between items-center
+}
+
+.header-title {
+  @apply uppercase font-normal tracking-wide italic font-oswald text-xl lg:text-2xl pr-10
+}
+
+.header-subtitle {
+  @apply text-xs not-italic mx-2 text-gray-500 font-light
+}
+
+.filter-button {
+  @apply items-center lg:border lg:border-black px-3 py-1.5 font-semibold text-sm hover:text-gray-500 transition-colors
+}
+
+.description-container {
+  @apply flex max-w-3xl mt-1 mb-4 relative mr-6
+}
+
+.description-text {
+  @apply line-clamp-2 lg:line-clamp-3 font-sans
+}
+
+.show-more-container {
+  @apply absolute flex flex-row right-0 bottom-0
+}
+
+.background-helper {
+  @apply w-16 bg-gradient-to-r from-transparent to-gray-100
+}
+
+.show-more {
+  @apply underline ps-4 font-semibold cursor-pointer bg-gray-100
+}
+
+.secondary-nav {
+  @apply flex flex-row w-full border-b border-gray-200 my-3 justify-center sm:justify-between items-center
+}
+
+.nav {
+  @apply flex flex-row space-x-6
+}
+
+.nav-link {
+  @apply px-1 py-3 text-sm font-normal text-gray-500
+}
+
+.active {
+  @apply border-b-2 border-black font-bold text-black
+}

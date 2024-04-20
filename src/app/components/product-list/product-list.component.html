@@ -1,69 +1,14 @@
-
-<section class="py-4 sm:px-2 md:px-4 lg:px-44">
-
-  <div>
-    <h1 class="uppercase font-normal text-2xl tracking-wide italic font-oswald">
-      NEW ARRIVALS: SHOES, CLOTHING & MORE
-      <span class="text-xs not-italic mx-2 text-gray-500 font-light">[{{ productsList()?.length }}]</span>
-    </h1>
-    <div class="flex max-w-3xl my-4 relative">
-      <p class="line-clamp-3 font-sans">Give your athletic attire a makeover with the latest adidas clothes and shoes.
-        Look for the freshest sneakers, the newest sportswear and the best accessories for running, working out or
-        relaxing
-        around the house. Look for sneakers featuring innovative 3D-printed outsoles that redefine forward motion. Or
-        discover shorts and tees offering technologies like HEAT.RDY, COLD.RDY and RAIN.RDY to help you outsmart the
-        weather
-        forecast. You'll also find the newest bag and backpack designs for gathering your gear as you head for a day at
-        the
-        gym or a weekend out of town.</p>
-      <div class="absolute flex flex-row right-0 bottom-0">
-        <span class="w-16 bg-gradient-to-r from-transparent to-gray-100"></span>
-        <span class="underline ps-4 font-semibold cursor-pointer bg-gray-100">Show More</span>
-      </div>
-    </div>
-  </div>
+<shared-main-header [products]="productsList()?.length"></shared-main-header>
 
 
-  <nav class="flex flex-row w-full border-b border-gray-200 my-3 justify-between items-center">
-    <ul class="flex flex-row space-x-6">
-      <li class="border-b-2 border-black px-2 py-3 text-sm font-bold"><a href="#">New Arrivals</a></li>
-      <li class="px-2 py-3 text-sm font-normal text-gray-500"><a href="#">Best Sellers</a></li>
-      <li class="px-2 py-3 text-sm font-normal text-gray-500"><a href="#">Release Dates</a></li>
-      <li class="px-2 py-3 text-sm font-normal text-gray-500"><a href="#">Blog</a></li>
-    </ul>
-    <button
-      class="flex border items-center border-black px-3 py-1.5 font-semibold text-sm hover:text-gray-500 transition-colors">
-      Filter & Sort
-      <svg class="w-6 ms-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-        <g id="SVGRepo_iconCarrier">
-          <path d="M1.5 6H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          </path>
-          <path d="M8 18H22.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          </path>
-          <path d="M20 6H22.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          </path>
-          <path d="M1.5 18H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          </path>
-          <circle cx="18" cy="6" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-          <circle cx="6" cy="18" r="2" stroke="currentColor" stroke-width="1.5"></circle>
-        </g>
-      </svg>
-    </button>
-  </nav>
+<div class="grid grid-flow-row gap-0.5 text-gray-900 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
 
 
-  <div class="grid grid-flow-row gap-0.5 text-gray-900 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+  <!-- HERE GO CARDS -->
+
+  @for (item of productsList(); track $index) {
+  <app-product-card [product]="item"></app-product-card>
+  }
 
 
-    <!-- HERE GO CARDS -->
-
-    @for (item of productsList(); track $index) {
-    <app-product-card [product]="item"></app-product-card>
-    }
-
-
-  </div>
-
-</section>
+</div>
