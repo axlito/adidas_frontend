@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ColorDetail, Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-product-card',
@@ -12,11 +12,18 @@ import { Product } from '../../interfaces/product';
   styleUrl: './product-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
 
   @Input({ required: true }) product!: Product;
+  @ViewChild('mainImage') mainImage!: ElementRef<HTMLInputElement>;
 
-  handleReviews(product: Product) {
+  constructor(private renderer: Renderer2) { }
+
+  ngOnInit(): void {
+
+  }
+
+  public handleReviews(product: Product) {
 
     let stars = [0, 0, 0, 0, 0];
 
@@ -41,6 +48,12 @@ export class ProductCardComponent {
       }
     }
     return stars
+  }
+
+  public previewImage(url: string) {
+    const mainWidth = this.mainImage.nativeElement.width;
+    this.renderer.setAttribute(this.mainImage.nativeElement, 'src', url)
+    this.renderer.setAttribute(this.mainImage.nativeElement, 'width', `${mainWidth}px`)
   }
 
 }

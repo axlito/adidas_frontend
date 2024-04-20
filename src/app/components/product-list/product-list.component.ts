@@ -29,14 +29,13 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductsList();
-    console.log(this.productsList());
 
   }
 
   public getProductsList(): void {
     this.productService.getGamesList()
       .subscribe((result: Product[]) => {
-        this._productsList.set(result);
+        this._productsList.set(result.slice(0,45));
       });
   }
 
@@ -46,7 +45,7 @@ export class ProductListComponent implements OnInit {
     const scrollAmount = window.scrollY || document.documentElement.scrollTop;
 
     if (scrollAmount > this.position) {
-      this.scrollClass = '-top-16';
+      this.scrollClass = '-top-24';
     } else {
       this.scrollClass = 'top-0';
     }
