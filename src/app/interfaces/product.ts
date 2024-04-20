@@ -1,3 +1,16 @@
+export interface ResponseData {
+  products: Product[];
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  pageSize: number
+  currentPage: number;
+  prevPage?: number;
+  nextPage?: number;
+  maxPages: number;
+}
+
 export interface Product {
   Image:               string;
   Image1:              string;

@@ -1,0 +1,48 @@
+.navbar-container {
+  @apply flex items-center justify-between lg:items-end px-6 lg:px-8 lg:border-b lg:sticky w-full z-20 transition-all duration-300 ease-in-out delay-200 bg-gray-100
+}
+
+.navbar-button {
+  @apply flex h-7 w-28 lg:hidden lg:w-80 cursor-pointer
+}
+
+.navbar-brand {
+  @apply flex w-16 h-16 items-center justify-center xl:justify-start xl:w-80 cursor-pointer
+}
+
+.right-navigation {
+  @apply flex w-28 justify-center items-end lg:flex-col lg:w-80 lg:ml-auto xl:ml-0
+}
+
+.navigation-container {
+  @apply hidden lg:flex lg:ml-6 xl:ml-0
+}
+
+.navigation {
+  @apply flex flex-row space-x-3
+}
+
+.navigation-link {
+  @apply transition-colors hover:border-b-2 hover:border-black border-b-2 border-gray-100 tracking-wider px-2 py-4 text-sm uppercase
+}
+
+
+.right-upper {
+  @apply hidden lg:flex lg:flex-row text-xs space-x-4 justify-end items-center my-2 w-full
+}
+
+.upper-links {
+  @apply hover:underline cursor-pointer lowercase
+}
+
+.right-lower {
+  @apply flex flex-row w-auto h-9 py-1 space-x-4 items-center
+}
+
+.lower-search {
+  @apply hidden lg:flex bg-gray-200 appearance-none border py-1 px-2 text-black placeholder:text-black text-sm focus:outline-none focus:border-black transition-colors
+}
+
+.lower-links {
+  @apply flex space-x-5 w-auto
+}
