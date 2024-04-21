@@ -1,4 +1,4 @@
-<shared-main-header [products]="productsList()?.length"></shared-main-header>
+<shared-main-header [products]="productsList().length"></shared-main-header>
 
 <div class="grid-container">
   @for (item of productsList(); track $index) {
@@ -7,8 +7,8 @@
 </div>
 
 <div class="site-padding flex flex-row w-full justify-end align-middle space-x-4 my-20">
-  <button (click)="getProductsList(pagination()!.prev)" class="pagination-button"
-    [disabled]="(pagination()!.current === pagination()!.prev)">
+  <button (click)="getProductsList(pagination().prev)" class="pagination-button"
+    [disabled]="(pagination().prev === null)">
     <svg class="w-4 h-full mr-3" fill="currentColor" version="1.1" id="XMLID_64_" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -23,9 +23,9 @@
     </svg>
     Prev
   </button>
-  <span class="px-4 py-2 font-bold border border-black">{{ pagination()!.current + 1 }}</span>
-  <button (click)="getProductsList(pagination()!.next)" class="pagination-button"
-    [disabled]="(pagination()!.current === pagination()!.max)">
+  <span class="px-4 py-2 font-bold border border-black">{{ pagination().current + 1 }}</span>
+  <button (click)="getProductsList(pagination().next)" class="pagination-button"
+    [disabled]="(pagination().next === null)">
     Next
     <svg class="w-4 h-full ml-3" fill="currentColor" version="1.1" id="XMLID_301_" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">

@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.component";
 
@@ -19,7 +19,10 @@ export class ProductCardComponent implements OnInit {
   @Input({ required: true }) product!: Product;
   @ViewChild('mainImage') mainImage!: ElementRef<HTMLInputElement>;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit(): void {
 
@@ -38,11 +41,9 @@ export class ProductCardComponent implements OnInit {
   }
 
   public isMobile(): boolean {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      return true
-    } else {
-      return false
-    }
+    return isPlatformBrowser(this.platformId)
+      ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      : false;
   }
 
 }

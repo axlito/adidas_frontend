@@ -19,9 +19,13 @@ import { MainHeaderComponent } from "../../shared/main-header/main-header.compon
 })
 export class ProductListComponent implements OnInit {
 
-  private _productsList = signal<Product[] | null>(null);
+  private _productsList = signal<Product[]>([]);
   public productsList = computed(() => this._productsList());
-  private _pagination = signal<Pagination | null>(null);
+  private _pagination = signal<Pagination>({
+    current: 0,
+    next: 1,
+    prev: null
+  });
   public pagination = computed(() => this._pagination());
 
 
@@ -33,12 +37,13 @@ export class ProductListComponent implements OnInit {
     this.getProductsList(0);
   }
 
-  public getProductsList(page: number): void {
-    this.productService.getProductList(page)
-      .subscribe((result: ResponseData) => {
-        this._productsList.set(result.products);
-        this._pagination.set(result.pagination);
-      });
+  public getProductsList(page: number | null): void {
+    if (typeof page === 'number')
+      this.productService.getProductList(page)
+        .subscribe((result: ResponseData) => {
+          this._productsList.set(result.products);
+          this._pagination.set(result.pagination);
+        });
   }
 
 }

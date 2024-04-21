@@ -5,9 +5,9 @@ export interface ResponseData {
 
 export interface Pagination {
   current: number;
-  prev: number;
-  next: number;
-  max: number
+  prev: number | null;
+  next: number | null;
+  max?: number
 }
 
 export interface Product {
