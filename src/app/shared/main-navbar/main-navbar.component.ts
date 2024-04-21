@@ -13,19 +13,17 @@ import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core'
 })
 export class MainNavbarComponent {
 
-  public scrollClass: string = 'top-0';
-  public hideTop: number = 0;
+  scrollClass: string = 'top-0';
+  hideTop: number = 0;
 
   @HostListener('document:scroll')
   public onViewportScroll() {
     const scrollAmount = window.scrollY || document.documentElement.scrollTop;
-    if (scrollAmount > this.hideTop) {
-      this.scrollClass = '-top-24';
-    } else {
-      this.scrollClass = 'top-0';
-    }
-    this.hideTop = scrollAmount
-  }
 
+    this.scrollClass = (scrollAmount > this.hideTop)
+      ? '-top-24'
+      : 'top-0';
+    this.hideTop = scrollAmount;
+  }
 
 }

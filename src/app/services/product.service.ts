@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Pagination, Product, ResponseData } from '../interfaces/product';
 
@@ -8,20 +8,16 @@ import { Pagination, Product, ResponseData } from '../interfaces/product';
 })
 export class ProductService {
 
+  #httpClient = inject(HttpClient);
+  #baseUrl: string = 'assets/DatosScraping.json';
 
-  private baseUrl: string = '../../assets/DatosScraping.json';
-
-  constructor(
-    private httpClient: HttpClient
-  ) { }
-
-  public getProductList(page: number): Observable<ResponseData> {
-    return this.httpClient.get<Product[]>(this.baseUrl)
+  getProductList(page: number): Observable<ResponseData> {
+    return this.#httpClient.get<Product[]>(this.#baseUrl)
       .pipe(
         map((result: Product[]) => {
           const max = (result.length % 48 === 0)
             ? result.length / 48
-            : (Math.floor(result.length / 48))
+            : (Math.floor(result.length / 48));
           return {
             products: result.slice((page * 48), (page + 1) * 48),
             pagination: {
@@ -30,8 +26,7 @@ export class ProductService {
               next: (page + 1) > max ? null : page + 1
             }
           }
-        })
-      );
+        }));
   }
 
 }

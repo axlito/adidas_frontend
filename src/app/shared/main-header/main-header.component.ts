@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'shared-main-header',
@@ -14,6 +13,6 @@ import { Product } from '../../interfaces/product';
 })
 export class MainHeaderComponent {
 
-  @Input({ required: true }) products?: number;
+  products = input.required<number>();
 
 }

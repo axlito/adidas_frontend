@@ -1,28 +1,28 @@
-<div class="product-card group" [ngClass]="{'product-card-animated': !isMobile()}" (mouseenter)="previewImage(product.Image)" (mouseleave)="previewImage(product.Image1)">
+<div class="product-card group" [ngClass]="{'product-card-animated': !isMobile()}" (mouseenter)="previewImage(product().Image)" (mouseleave)="previewImage(product().Image1)">
   <div class="card-container">
-    <span class="product-price">{{ product.Price }}</span>
+    <span class="product-price">{{ product().Price }}</span>
     <span class="add-to-cart">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#cccccc">
         <path
           d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
       </svg>
     </span>
-    <img [src]="product.Image1" [alt]="product.Description_title" #mainImage>
+    <img [src]="product().Image1" [alt]="product().Description_title" #mainImage>
   </div>
 
   <div class="color-detail hidden" [ngClass]="{'group-hover:flex': !isMobile()}">
-    @for (item of product.Color_detail; track $index) {
-    <img (mouseenter)="previewImage(item.image_url)" (mouseleave)="previewImage(product.Image1)" [src]="item.image_url"
+    @for (item of product().Color_detail; track $index) {
+    <img (mouseenter)="previewImage(item.image_url)" (mouseleave)="previewImage(product().Image1)" [src]="item.image_url"
       class="color-images" [alt]="item.color" loading="lazy">
     }
   </div>
   <div class="p-2">
-    <shared-rating-stars [product]="product"></shared-rating-stars>
+    <shared-rating-stars [product]="product()"></shared-rating-stars>
     <div class="my-2">
-      <h1 class="product-description text-black">{{ product.Name }}</h1>
-      <p class="product-description text-gray-500">{{ product.Category }}</p>
+      <h1 class="product-description text-black">{{ product().Name }}</h1>
+      <p class="product-description text-gray-500">{{ product().Category }}</p>
       <p class="product-description">
-        <span class="text-gray-500">{{ product.Colors || '1 color' }}</span>
+        <span class="text-gray-500">{{ product().Colors || '1 color' }}</span>
         <span class="text-gray-900"> · best seller</span>
       </p>
     </div>
