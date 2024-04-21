@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Pagination, Product, ResponseData } from '../interfaces/product';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable, signal} from '@angular/core';
+import {map, Observable} from 'rxjs';
+import {Product, ResponseData} from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class ProductService {
 
   #httpClient = inject(HttpClient);
   #baseUrl: string = 'assets/DatosScraping.json';
+  #product = signal<Partial<Product>>({});
 
   getProductList(page: number): Observable<ResponseData> {
     return this.#httpClient.get<Product[]>(this.#baseUrl)
@@ -27,6 +28,18 @@ export class ProductService {
             }
           }
         }));
+  }
+
+  updateCurrentProduct(newValue: Product) {
+    this.#product.set(newValue);
+    localStorage.setItem('product', JSON.stringify(this.#product()));
+  }
+
+  getCurrentProduct(): Product {
+    const product = localStorage.getItem('product');
+    return (product !== null)
+      ? JSON.parse(product)
+      : this.#product() as Product;
   }
 
 }
