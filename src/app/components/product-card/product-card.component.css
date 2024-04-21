@@ -3,7 +3,7 @@
 }
 
 .product-card {
-  @apply max-w-md overflow-hidden border border-gray-100 bg-gray-100 z-10
+  @apply max-w-md overflow-hidden border border-neutral-100 bg-neutral-100 z-10
 }
 
 .product-card-animated {
@@ -15,7 +15,7 @@
 }
 
 .product-price {
-  @apply bg-gray-100 absolute bottom-0 left-2 p-1 leading-3 text-sm group-hover:bottom-2 transition-all
+  @apply bg-neutral-100 absolute bottom-0 left-2 p-1 leading-3 text-sm group-hover:bottom-2 transition-all
 }
 
 .add-to-cart {

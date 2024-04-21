@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, computed, inject, signal, viewChild } from '@angular/core';
-import { Pagination, Product, ResponseData } from '../../interfaces/product';
-import { ProductService } from '../../services/product.service';
-import { ProductCardComponent } from "../product-card/product-card.component";
-import { MainHeaderComponent } from "../../shared/main-header/main-header.component";
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, signal, viewChild} from '@angular/core';
+import {Pagination, Product, ResponseData} from '../../interfaces/product';
+import {ProductService} from '../../services/product.service';
+import {ProductCardComponent} from "../../components/product-card/product-card.component";
+import {MainHeaderComponent} from "../../components/main-header/main-header.component";
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +19,6 @@ import { MainHeaderComponent } from "../../shared/main-header/main-header.compon
 })
 export class ProductListComponent implements OnInit {
 
-  navbar = viewChild<ElementRef<HTMLImageElement>>('navbar');
   #productService = inject(ProductService);
   productsList = signal<Product[]>([]);
   pagination = signal<Pagination>({

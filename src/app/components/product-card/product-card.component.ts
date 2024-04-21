@@ -1,10 +1,10 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, PLATFORM_ID, Renderer2, inject, input, viewChild } from '@angular/core';
 import { Product } from '../../interfaces/product';
-import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.component";
+import { RatingStarsComponent } from "../rating-stars/rating-stars.component";
 
 @Component({
-  selector: 'app-product-card',
+  selector: 'component-product-card',
   standalone: true,
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',

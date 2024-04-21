@@ -1,0 +1,15 @@
+.footer-container {
+  @apply flex flex-col w-full justify-center align-middle bg-neutral-800 text-white p-3
+}
+
+.upper-links {
+  @apply flex flex-row w-auto justify-center align-middle
+}
+
+.link {
+  @apply text-xs py-2 px-4
+}
+
+.footer-brand {
+  @apply flex text-xs py-2 px-4 justify-center mt-4
+}

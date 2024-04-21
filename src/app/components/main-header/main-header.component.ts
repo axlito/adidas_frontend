@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
-  selector: 'shared-main-header',
+  selector: 'component-main-header',
   standalone: true,
   imports: [
     CommonModule,

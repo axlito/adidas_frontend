@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 
 @Component({
-  selector: 'shared-main-navbar',
+  selector: 'component-main-navbar',
   standalone: true,
   imports: [
     CommonModule,
+    NgOptimizedImage,
   ],
   templateUrl: './main-navbar.component.html',
   styleUrl: './main-navbar.component.css',
@@ -17,7 +18,7 @@ export class MainNavbarComponent {
   hideTop: number = 0;
 
   @HostListener('document:scroll')
-  public onViewportScroll() {
+  onViewportScroll() {
     const scrollAmount = window.scrollY || document.documentElement.scrollTop;
 
     this.scrollClass = (scrollAmount > this.hideTop)
