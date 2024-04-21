@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, PLATFORM_ID, Renderer2, inject, input, viewChild } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.component";
 
@@ -14,35 +14,33 @@ import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.com
     RatingStarsComponent
   ]
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements AfterViewInit {
 
-  @Input({ required: true }) product!: Product;
-  @ViewChild('mainImage') mainImage!: ElementRef<HTMLInputElement>;
+  product = input.required<Product>();
+  mainImage = viewChild<ElementRef<HTMLImageElement>>('mainImage');
+  #renderer = inject(Renderer2);
+  #platformId = inject(PLATFORM_ID);
+  #imageWidth: number = 0;
 
-  constructor(private renderer: Renderer2) { }
-
-  ngOnInit(): void {
-
+  @HostListener('window:resize')
+  ngAfterViewInit(): void {
+    this.#renderer.setAttribute(this.mainImage()!.nativeElement, 'width', '100%');
+    setTimeout(() => {
+      this.#imageWidth = this.mainImage()!.nativeElement.width;
+    }, 50);
   }
 
-
-  //
-  // REMEMBER TO FIX HOVER WIDTH WHEN WINDOW CHANGE
-  //
-  public previewImage(url: string) {
+  previewImage(url: string) {
     if (!this.isMobile() && url !== "") {
-      const mainWidth = this.mainImage.nativeElement.width;
-      this.renderer.setAttribute(this.mainImage.nativeElement, 'src', url)
-      this.renderer.setAttribute(this.mainImage.nativeElement, 'width', `${mainWidth}px`)
+      this.#renderer.setAttribute(this.mainImage()!.nativeElement, 'src', url);
+      this.#renderer.setAttribute(this.mainImage()!.nativeElement, 'width', `${this.#imageWidth}px`);
     }
   }
 
-  public isMobile(): boolean {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      return true
-    } else {
-      return false
-    }
+  isMobile(): boolean {
+    return isPlatformBrowser(this.#platformId)
+      ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      : false;
   }
 
 }

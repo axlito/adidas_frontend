@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, computed, inject, signal, viewChild } from '@angular/core';
 import { Pagination, Product, ResponseData } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
 import { ProductCardComponent } from "../product-card/product-card.component";
@@ -19,26 +19,26 @@ import { MainHeaderComponent } from "../../shared/main-header/main-header.compon
 })
 export class ProductListComponent implements OnInit {
 
-  private _productsList = signal<Product[] | null>(null);
-  public productsList = computed(() => this._productsList());
-  private _pagination = signal<Pagination | null>(null);
-  public pagination = computed(() => this._pagination());
-
-
-  @ViewChild('navbar') navbar!: ElementRef<HTMLInputElement>;
-
-  constructor(private productService: ProductService) { }
+  navbar = viewChild<ElementRef<HTMLImageElement>>('navbar');
+  #productService = inject(ProductService);
+  productsList = signal<Product[]>([]);
+  pagination = signal<Pagination>({
+    current: 0,
+    next: 1,
+    prev: null
+  });
 
   ngOnInit(): void {
     this.getProductsList(0);
   }
 
-  public getProductsList(page: number): void {
-    this.productService.getProductList(page)
-      .subscribe((result: ResponseData) => {
-        this._productsList.set(result.products);
-        this._pagination.set(result.pagination);
-      });
+  getProductsList(page: number | null): void {
+    if (typeof page === 'number')
+      this.#productService.getProductList(page)
+        .subscribe((result: ResponseData) => {
+          this.productsList.set(result.products);
+          this.pagination.set(result.pagination);
+        });
   }
 
 }
