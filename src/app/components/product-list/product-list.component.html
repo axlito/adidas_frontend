@@ -23,7 +23,7 @@
     </svg>
     Prev
   </button>
-  <span class="px-4 py-2 font-bold border border-black">{{ pagination().current + 1 }}</span>
+  <span class="px-4 py-2 font-bold">{{ pagination().current + 1 }}</span>
   <button (click)="getProductsList(pagination().next)" class="pagination-button"
     [disabled]="(pagination().next === null)">
     Next

@@ -16,7 +16,7 @@ export class MainNavbarComponent {
   public scrollClass: string = 'top-0';
   public hideTop: number = 0;
 
-  @HostListener('document:scroll', ['$event'])
+  @HostListener('document:scroll')
   public onViewportScroll() {
     const scrollAmount = window.scrollY || document.documentElement.scrollTop;
     if (scrollAmount > this.hideTop) {

@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnInit, PLATFORM_ID, Renderer2, ViewChild } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.component";
 
@@ -14,29 +14,30 @@ import { RatingStarsComponent } from "../../shared/rating-stars/rating-stars.com
     RatingStarsComponent
   ]
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements AfterViewInit {
 
   @Input({ required: true }) product!: Product;
   @ViewChild('mainImage') mainImage!: ElementRef<HTMLInputElement>;
+  private imageWidth: number = 0;
 
   constructor(
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-  ngOnInit(): void {
 
+  @HostListener('window:resize')
+  ngAfterViewInit(): void {
+    this.renderer.setAttribute(this.mainImage.nativeElement, 'width', '100%');
+    setTimeout(() => {
+      this.imageWidth = this.mainImage.nativeElement.width;
+    }, 50)
   }
 
-
-  //
-  // REMEMBER TO FIX HOVER WIDTH WHEN WINDOW CHANGE
-  //
   public previewImage(url: string) {
     if (!this.isMobile() && url !== "") {
-      const mainWidth = this.mainImage.nativeElement.width;
       this.renderer.setAttribute(this.mainImage.nativeElement, 'src', url)
-      this.renderer.setAttribute(this.mainImage.nativeElement, 'width', `${mainWidth}px`)
+      this.renderer.setAttribute(this.mainImage.nativeElement, 'width', `${this.imageWidth}px`)
     }
   }
 
