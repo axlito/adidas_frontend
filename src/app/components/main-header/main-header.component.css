@@ -11,11 +11,11 @@
 }
 
 .header-subtitle {
-  @apply text-xs not-italic mx-2 text-gray-500 font-light
+  @apply text-xs not-italic mx-2 text-neutral-500 font-light
 }
 
 .filter-button {
-  @apply items-center lg:border lg:border-black px-3 py-1.5 font-semibold text-sm hover:text-gray-500 transition-colors
+  @apply items-center lg:border lg:border-black px-3 py-1.5 font-semibold text-sm hover:text-neutral-500 transition-colors
 }
 
 .description-container {
@@ -31,15 +31,15 @@
 }
 
 .background-helper {
-  @apply w-16 bg-gradient-to-r from-transparent to-gray-100
+  @apply w-16 bg-gradient-to-r from-transparent to-neutral-100
 }
 
 .show-more {
-  @apply underline ps-4 font-semibold cursor-pointer bg-gray-100
+  @apply underline ps-4 font-semibold cursor-pointer bg-neutral-100
 }
 
 .secondary-nav {
-  @apply flex flex-row w-full border-b border-gray-200 my-3 justify-center sm:justify-between items-center
+  @apply flex flex-row w-full border-b border-neutral-200 my-3 justify-center sm:justify-between items-center
 }
 
 .nav {
@@ -47,7 +47,7 @@
 }
 
 .nav-link {
-  @apply px-1 py-3 text-sm font-normal text-gray-500
+  @apply px-1 py-3 text-sm font-normal text-neutral-500
 }
 
 .active {

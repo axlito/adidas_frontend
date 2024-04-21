@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, Signal, input } from '@angul
 import { Product } from '../../interfaces/product';
 
 @Component({
-  selector: 'shared-rating-stars',
+  selector: 'component-rating-stars',
   standalone: true,
   imports: [
     CommonModule,

@@ -7,5 +7,5 @@
 }
 
 .pagination-button {
-  @apply flex flex-row items-center px-3 py-1.5 font-semibold text-sm hover:bg-black hover:text-white transition-colors disabled:text-gray-400 disabled:bg-transparent
+  @apply flex flex-row items-center px-3 py-1.5 font-semibold text-sm hover:bg-black hover:text-white transition-colors disabled:text-neutral-400 disabled:bg-transparent
 }

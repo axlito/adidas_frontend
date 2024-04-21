@@ -1,5 +1,5 @@
 .navbar-container {
-  @apply flex items-center justify-between lg:items-end px-6 lg:px-8 lg:border-b lg:sticky w-full z-20 transition-all duration-300 ease-in-out delay-200 bg-gray-100
+  @apply flex items-center justify-between lg:items-end px-6 lg:px-8 lg:border-b lg:sticky w-full z-20 transition-all duration-300 ease-in-out delay-200 bg-neutral-100
 }
 
 .navbar-button {
@@ -23,7 +23,7 @@
 }
 
 .navigation-link {
-  @apply transition-colors hover:border-b-2 hover:border-black border-b-2 border-gray-100 tracking-wider px-2 py-4 text-sm uppercase
+  @apply transition-colors hover:border-b-2 hover:border-black border-b-2 border-neutral-100 tracking-wider px-2 py-4 text-sm uppercase
 }
 
 
@@ -40,7 +40,7 @@
 }
 
 .lower-search {
-  @apply hidden lg:flex bg-gray-200 appearance-none border py-1 px-2 text-black placeholder:text-black text-sm focus:outline-none focus:border-black transition-colors
+  @apply hidden lg:flex bg-neutral-200 appearance-none border py-1 px-2 text-black placeholder:text-black text-sm focus:outline-none focus:border-black transition-colors
 }
 
 .lower-links {
