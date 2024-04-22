@@ -1,10 +1,14 @@
 <div class="flex flex-col lg:flex-row">
   @switch (uiState()) {
     @case ('LOADING') {
-      <p>Loading</p>
+      <div class="ui-container">
+        <p class="font-bold text-7xl text-neutral-500">Loading ...</p>
+      </div>
     }
     @case ('404') {
-      <p>:( 404</p>
+      <div class="ui-container">
+        <p class="font-bold text-7xl text-red-400">Oops, not found - 404 :( </p>
+      </div>
     }
     @case ('READY') {
       @if (product()) {
