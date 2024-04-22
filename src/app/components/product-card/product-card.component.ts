@@ -1,7 +1,8 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, PLATFORM_ID, Renderer2, inject, input, viewChild } from '@angular/core';
-import { Product } from '../../interfaces/product';
-import { RatingStarsComponent } from "../rating-stars/rating-stars.component";
+import {CommonModule, isPlatformBrowser} from '@angular/common';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, input, OnInit, PLATFORM_ID, Renderer2, viewChild} from '@angular/core';
+import {Product} from '../../interfaces/product';
+import {RatingStarsComponent} from "../rating-stars/rating-stars.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'component-product-card',
@@ -11,16 +12,24 @@ import { RatingStarsComponent } from "../rating-stars/rating-stars.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    RatingStarsComponent
+    RatingStarsComponent,
+    RouterLink
   ]
 })
-export class ProductCardComponent implements AfterViewInit {
+export class ProductCardComponent implements OnInit, AfterViewInit {
 
   product = input.required<Product>();
   mainImage = viewChild<ElementRef<HTMLImageElement>>('mainImage');
+  showColors = input<boolean>(true);
   #renderer = inject(Renderer2);
   #platformId = inject(PLATFORM_ID);
   #imageWidth: number = 0;
+  productUUID: string = '';
+
+  ngOnInit(): void {
+    const lastPos = this.product().Content.split('/');
+    this.productUUID = lastPos[lastPos.length - 1].split('.')[0];
+  }
 
   @HostListener('window:resize')
   ngAfterViewInit(): void {

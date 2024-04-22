@@ -3,7 +3,7 @@
 }
 
 .product-card {
-  @apply max-w-md overflow-hidden border border-neutral-100 bg-neutral-100 z-10
+  @apply max-w-md overflow-hidden border border-neutral-100 bg-neutral-100 z-10 cursor-pointer
 }
 
 .product-card-animated {

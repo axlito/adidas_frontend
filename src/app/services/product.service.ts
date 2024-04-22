@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Pagination, Product, ResponseData } from '../interfaces/product';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
+import {map, Observable} from 'rxjs';
+import {Product, ResponseData} from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,15 @@ export class ProductService {
               next: (page + 1) > max ? null : page + 1
             }
           }
+        }));
+  }
+
+  getProduct(id: string): Observable<Product | null> {
+    return this.#httpClient.get<Product[]>(this.#baseUrl)
+      .pipe(
+        map((result: Product[]) => {
+          const index = result.findIndex(value => value.Content.endsWith(`${id}.html`));
+          return index >= 0 ? result[index] : null;
         }));
   }
 

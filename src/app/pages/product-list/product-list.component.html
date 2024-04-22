@@ -2,7 +2,7 @@
 
 <div class="grid-container">
   @for (item of productsList(); track $index) {
-    <component-product-card [product]="item"></component-product-card>
+    <component-product-card [product]="item" [showColors]="true"></component-product-card>
   }
 </div>
 

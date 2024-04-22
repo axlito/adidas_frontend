@@ -11,25 +11,25 @@ export interface Pagination {
 }
 
 export interface Product {
-  Image:               string;
-  Image1:              string;
-  Content:             string;
-  Keywords:            string;
-  Name:                string;
-  Category:            Category;
-  Colors:              string;
-  Price:               string;
-  Promo_apply:         string;
-  Reviews:             ReviewsClass;
-  Description_title:   string;
+  Image: string;
+  Image1: string;
+  Content: string;
+  Keywords: string;
+  Name: string;
+  Category: string;
+  Colors: string;
+  Price: string;
+  Promo_apply: string;
+  Reviews: ReviewsClass;
+  Description_title: string;
   Description_content: string;
-  Details:             string;
-  Care:                CareClass | string;
-  Color_detail:        ColorDetail[];
+  Details: string;
+  Care: CareClass;
+  Color_detail: ColorDetail[];
 }
 
 export interface CareClass {
-  title:   Title;
+  title: string;
   content: Content[];
 }
 
@@ -47,10 +47,6 @@ export enum Content {
   TumbleDryLowHeat = "Tumble dry low heat",
 }
 
-export enum Title {
-  WashingInstructions = "WASHING INSTRUCTIONS",
-}
-
 export enum Category {
   ChildrenOriginals = "Children Originals",
   InfantToddlerOriginals = "Infant & Toddler Originals",
@@ -63,16 +59,11 @@ export enum Category {
 }
 
 export interface ColorDetail {
-  color:     Color;
+  color: string;
   image_url: string;
 }
 
-export enum Color {
-  Black = "Black",
-  VioletTone = "Violet Tone",
-}
-
 export interface ReviewsClass {
-  votes:  number;
+  votes: number;
   rating: number;
 }

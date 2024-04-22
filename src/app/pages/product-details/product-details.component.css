@@ -1,3 +1,88 @@
-:host {
-  display: block;
+.main-gallery-container {
+  @apply flex justify-center flex-col w-full lg:w-4/6 xl:w-3/4 border-r border-r-neutral-300
+}
+
+.main-sidebar {
+  @apply w-full lg:w-2/6 flex-col lg:fixed xl:w-1/4 right-0 top-0 lg:mt-20 px-6 xl:px-10 2xl:px-14 my-10 pt-10
+}
+
+.accordion-container {
+  @apply  my-10 max-w-4xl mx-auto
+}
+
+.more-products {
+  @apply px-6 max-w-6xl flex flex-col space-y-4 mx-auto my-10
+}
+
+.accordion-header {
+  @apply flex justify-between cursor-pointer p-8 border-t border-neutral-300 text-black font-bold
+}
+
+.arrow-controls {
+  @apply flex flex-row items-center space-x-4
+}
+
+.content-title {
+  @apply font-bold text-2xl my-2 tracking-wide
+}
+
+.content-text {
+  @apply whitespace-pre-wrap text-base
+}
+
+.product-title {
+  @apply font-bold text-3xl my-2 tracking-wide uppercase
+}
+
+.color-grid {
+  @apply grid grid-flow-row grid-cols-5 gap-1
+}
+
+.color-images {
+  @apply border-b-4 border-b-transparent hover:border-black cursor-pointer
+}
+
+.button-container {
+  @apply relative flex h-[50px] border border-black w-full;
+
+}
+
+.add-to-bag {
+  @apply absolute bg-black border border-black justify-between flex flex-row items-center w-full font-semibold text-base tracking-wider uppercase h-[50px] px-4 text-white -top-[5px] -left-[3px] hover:text-neutral-400 active:top-[-1px] active:left-[0px] transition-all duration-100 ease-linear;
+}
+
+.heart-icon {
+  @apply flex flex-row items-center w-auto font-semibold p-3 px-4 text-black border border-black
+}
+
+.popular {
+  @apply px-4 py-2 bg-neutral-200/50 text-sm mt-6
+}
+
+.main-gallery {
+  @apply grid grid-cols-2 gap-px relative
+}
+
+.show-more {
+  @apply border border-black bg-white justify-between px-3 text-black flex flex-row items-center w-36 font-semibold text-sm uppercase py-3 absolute z-10 -bottom-[25px] left-1/2 -translate-x-[72px]
+}
+
+.item .activeIcon {
+  @apply hidden
+}
+
+.item.active .activeIcon {
+  @apply flex
+}
+
+.item.active .inactiveIcon {
+  @apply hidden
+}
+
+.item:not(.active) .content {
+  @apply h-0 overflow-hidden p-0
+}
+
+.item.active .content {
+  @apply px-8 pb-8
 }

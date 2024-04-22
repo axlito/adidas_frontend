@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Signal, input } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Input, Signal, input} from '@angular/core';
+import {Product} from '../../interfaces/product';
 
 @Component({
   selector: 'component-rating-stars',
@@ -14,6 +14,9 @@ import { Product } from '../../interfaces/product';
 export class RatingStarsComponent {
 
   product = input.required<Product>();
+  darkColor = input.required<string>();
+  lightColor = input.required<string>();
+  showVotes = input<boolean>(false);
 
   handleReviews(product: Product) {
     let stars = [0, 0, 0, 0, 0];
