@@ -1,169 +1,177 @@
 <div class="flex flex-col lg:flex-row">
-  <div class="main-gallery-container">
-    <div class="main-gallery">
-      <img class="w-full" [src]="product().Image || product().Image1" alt="">
-      <img class="w-full" [src]="product().Image1" alt="">
-      <img class="w-full" [src]="product().Color_detail[0]!.image_url" alt="">
-      <img class="w-full" [src]="product().Color_detail[1].image_url" alt="">
-      <button class="show-more">
-        Show More
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="inactiveIcon">
-          <path d="m6 9 6 6 6-6"/>
-        </svg>
-      </button>
-    </div>
-    <div class="accordion-container border-b border-b-gray-300 order-2">
-      <div class="item" #reviews>
-        <div class="accordion-header" (click)="collapse(reviews)">
-          <h1 class="accordion-title">Reviews [{{ product().Reviews.votes || '0' }}]</h1>
-          <div class="arrow-controls">
-            <span class="font-bold">{{ product().Reviews.rating }}</span>
-            <component-rating-stars [product]="product()" [lightColor]="'rgba(0,255,35,0.25)'" [darkColor]="'#00ff1e'"></component-rating-stars>
-            <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
-          </span>
-          </div>
-        </div>
-        <div class="content pointer-events-none">
-          <h1 class="content-title">:( NO INFO</h1>
-          <p class="content-text">Sorry! There's no info here for now.</p>
-        </div>
-      </div>
-      <div class="item" #description>
-        <div class="accordion-header" (click)="collapse(description)">
-          <h1 class="accordion-title">Description</h1>
-          <div class="arrow-controls">
-            <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
-          </span>
-          </div>
-        </div>
-        <div class="content">
-          <h1 class="content-title">{{ product().Description_title }}</h1>
-          <p class="content-text">{{ product().Description_content }}</p>
-        </div>
-      </div>
-      @if (product().Details.length > 0) {
-        <div class="item" #details>
-          <div class="accordion-header" (click)="collapse(details)">
-            <h1 class="accordion-title">Details</h1>
-            <div class="arrow-controls">
-            <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
-          </span>
-            </div>
-          </div>
-          <div class="content">
-            <ul class="list-disc space-y-2 px-6">
-              @for (item of product().Details.split('\n'); track $index) {
-                <li>{{ item }}</li>
-              }
-            </ul>
-          </div>
-        </div>
-      }
-      @if (product().Care !== undefined) {
-        <div class="item" #care>
-          <div class="accordion-header" (click)="collapse(care)">
-            <h1 class="accordion-title">Care</h1>
-            <div class="arrow-controls">
-            <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
-          </span>
-            </div>
-          </div>
-          <div class="content">
-            <div class="flex flex-row w-full">
-              <div class="flex flex-col w-1/2">
-                <h1 class="content-title">{{ product().Care.title }}</h1>
-                <ul class="list-disc space-y-2">
-                  @for (item of product().Care.content; track $index) {
-                    <li class="flex flex-row">
-                      @for (image of careImages; track $index) {
-                        @if (image.key === item) {
-                          <img class="w-6 mr-3" [src]="image.value" alt="">
-                        }
-                      }
-                      {{ item }}
-                    </li>
-                  }
-                </ul>
-              </div>
-              <div class="flex flex-col w-1/2">
-                <h1 class="content-title">EXTRA CARE INFORMATION</h1>
-                <p class="content-text">Sorry! There's no info here for now.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      }
-    </div>
-    <div class="more-products order-3">
-      <h1 class="product-title">YOU MAY ALSO LIKE</h1>
-      <div class="grid grid-cols-2 lg:grid-cols-4">
-        @for (item of randomProducts(); track $index) {
-          <component-product-card [product]="item" [showColors]="false"></component-product-card>
-        }
-      </div>
-    </div>
-
-    <div class="main-sidebar order-1">
-      <div class="flex flex-row justify-between">
-        <p>{{ product().Category }}</p>
-        <component-rating-stars [product]="product()" [lightColor]="'#cccccc'" [darkColor]="'#000000'" [showVotes]="true"></component-rating-stars>
-      </div>
-      <h1 class="product-title">{{ product().Name }}</h1>
-      <p class="font-bold text-lg my-2">{{ product().Price }}</p>
-      <div class="popular">
-        <p class="flex flex-row">
-          <img class="w-4 h-4 mr-2 text-black" src="https://www.adidas.com/glass/react/c72bc0c/assets/img/icon-adidas-social-proof-v2.svg" alt="">
-          <span><strong>Popular</strong> over 46 people have bought this product in the last 24 hours.</span>
-        </p>
-      </div>
-      <p class="my-8">{{ product().Promo_apply }}</p>
-      <div class="flex flex-col">
-        <p class="font-bold mb-3">Colors</p>
-        <div class="color-grid">
-          @for (image of product().Color_detail; track $index) {
-            <img class="color-images" [src]="image.image_url" alt="" (mouseenter)="updateColorDetail($index)">
-          }
-        </div>
-        <span class="text-sm my-1">{{ colorDetail() || product().Color_detail[0].color }}</span>
-        <div class="flex flex-row my-10 space-x-3">
-          <div class="button-container">
-            <button class="add-to-bag">
-              Add to bag
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                   class="">
-                <path d="M18 8L22 12L18 16"/>
-                <path d="M2 12H22"/>
+  @switch (uiState()) {
+    @case ('LOADING') {
+      <p>Loading</p>
+    }
+    @case ('404') {
+      <p>:( 404</p>
+    }
+    @case ('READY') {
+      @if (product()) {
+        <div class="main-gallery-container">
+          <div class="main-gallery">
+            <img class="w-full" [src]="product()!.Image || product()!.Image1" alt="">
+            <img class="w-full" [src]="product()!.Image1" alt="">
+            <img class="w-full" [src]="product()!.Color_detail[0].image_url" alt="">
+            <img class="w-full" [src]="product()!.Color_detail[1].image_url" alt="">
+            <button class="show-more">
+              Show More
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="inactiveIcon">
+                <path d="m6 9 6 6 6-6"/>
               </svg>
             </button>
           </div>
-          <button class="heart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-            </svg>
-          </button>
+          <div class="accordion-container border-b border-b-gray-300 order-2">
+            <div class="item" #reviews>
+              <div class="accordion-header" (click)="collapse(reviews)">
+                <h1 class="accordion-title">Reviews [{{ product()!.Reviews.votes || '0' }}]</h1>
+                <div class="arrow-controls">
+                  <span class="font-bold">{{ product()!.Reviews.rating }}</span>
+                  <component-rating-stars [product]="product()!" [lightColor]="'rgba(0,255,35,0.25)'" [darkColor]="'#00ff1e'"></component-rating-stars>
+                  <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+                </div>
+              </div>
+              <div class="content pointer-events-none">
+                <h1 class="content-title">:( NO INFO</h1>
+                <p class="content-text">Sorry! There's no info here for now.</p>
+              </div>
+            </div>
+            <div class="item" #description>
+              <div class="accordion-header" (click)="collapse(description)">
+                <h1 class="accordion-title">Description</h1>
+                <div class="arrow-controls">
+            <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+                </div>
+              </div>
+              <div class="content">
+                <h1 class="content-title">{{ product()!.Description_title }}</h1>
+                <p class="content-text">{{ product()!.Description_content }}</p>
+              </div>
+            </div>
+            @if (product()!.Details.length > 0) {
+              <div class="item" #details>
+                <div class="accordion-header" (click)="collapse(details)">
+                  <h1 class="accordion-title">Details</h1>
+                  <div class="arrow-controls">
+            <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+                  </div>
+                </div>
+                <div class="content">
+                  <ul class="list-disc space-y-2 px-6">
+                    @for (item of product()!.Details.split('\n'); track $index) {
+                      <li>{{ item }}</li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            }
+            @if (product()!.Care !== undefined) {
+              <div class="item" #care>
+                <div class="accordion-header" (click)="collapse(care)">
+                  <h1 class="accordion-title">Care</h1>
+                  <div class="arrow-controls">
+            <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="activeIcon"><path d="m18 15-6-6-6 6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="inactiveIcon"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+                  </div>
+                </div>
+                <div class="content">
+                  <div class="flex flex-row w-full">
+                    <div class="flex flex-col w-1/2">
+                      <h1 class="content-title">{{ product()!.Care.title }}</h1>
+                      <ul class="list-disc space-y-2">
+                        @for (item of product()!.Care.content; track $index) {
+                          <li class="flex flex-row">
+                            <img class="w-6 mr-3" [src]="careImages[item]" alt="">
+                            {{ item }}
+                          </li>
+                        }
+                      </ul>
+                    </div>
+                    <div class="flex flex-col w-1/2">
+                      <h1 class="content-title">EXTRA CARE INFORMATION</h1>
+                      <p class="content-text">Sorry! There's no info here for now.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            }
+          </div>
+          <div class="more-products order-3">
+            <h1 class="product-title">YOU MAY ALSO LIKE</h1>
+            <div class="grid grid-cols-2 lg:grid-cols-4">
+              @for (item of randomProducts(); track $index) {
+                <component-product-card [product]="item" [showColors]="false"></component-product-card>
+              }
+            </div>
+          </div>
+
+          <div class="main-sidebar order-1">
+            <div class="flex flex-row justify-between">
+              <p>{{ product()!.Category }}</p>
+              <component-rating-stars [product]="product()!" [lightColor]="'#cccccc'" [darkColor]="'#000000'" [showVotes]="true"></component-rating-stars>
+            </div>
+            <h1 class="product-title">{{ product()!.Name }}</h1>
+            <p class="font-bold text-lg my-2">{{ product()!.Price }}</p>
+            <div class="popular">
+              <p class="flex flex-row">
+                <img class="w-4 h-4 mr-2 text-black" src="https://www.adidas.com/glass/react/c72bc0c/assets/img/icon-adidas-social-proof-v2.svg" alt="">
+                <span><strong>Popular</strong> over 46 people have bought this product in the last 24 hours.</span>
+              </p>
+            </div>
+            <p class="my-8">{{ product()!.Promo_apply }}</p>
+            <div class="flex flex-col">
+              <p class="font-bold mb-3">Colors</p>
+              <div class="color-grid">
+                @for (image of product()!.Color_detail; track $index) {
+                  <img class="color-images" [src]="image.image_url" alt="" (mouseenter)="updateColorDetail($index)">
+                }
+              </div>
+              <span class="text-sm my-1">{{ colorDetail() || product()!.Color_detail[0].color }}</span>
+              <div class="flex flex-row my-10 space-x-3">
+                <div class="button-container">
+                  <button class="add-to-bag">
+                    Add to bag
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="">
+                      <path d="M18 8L22 12L18 16"/>
+                      <path d="M2 12H22"/>
+                    </svg>
+                  </button>
+                </div>
+                <button class="heart-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                  </svg>
+                </button>
+              </div>
+              <p class="text-base">4 interest-free payments of $27.50 with <strong>Klarna</strong>. <a href="#" class="underline">Learn More</a></p>
+            </div>
+
+          </div>
+
         </div>
-        <p class="text-base">4 interest-free payments of $27.50 with <strong>Klarna</strong>. <a href="#" class="underline">Learn More</a></p>
-      </div>
-
-    </div>
-
-  </div>
+      }
+    }
+  }
 </div>

@@ -1,4 +1,4 @@
-<div [routerLink]="['/product', productUUID]" (click)="setProduct(product())" class="product-card group" [ngClass]="{'product-card-animated': !isMobile()}" (mouseenter)="previewImage(product().Image)"
+<div [routerLink]="['/product', productUUID]" class="product-card group" [ngClass]="{'product-card-animated': !isMobile()}" (mouseenter)="previewImage(product().Image)"
      (mouseleave)="previewImage(product().Image1)">
   <div class="card-container">
     <span class="product-price">{{ product().Price }}</span>
